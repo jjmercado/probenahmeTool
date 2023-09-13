@@ -1,10 +1,14 @@
 <h1>Pumpvorgang</h1>
 
-<label for="pumpSample">Pumpprobe</label>
-<input type="checkbox" name="pumpSample" id="pumpSample">
+<div>
+    <label for="pumpSample">Pumpprobe</label>
+    <input type="checkbox" name="pumpSample" id="pumpSample">
+</div>
 
-<label for="scoopSample">Schöpfprobe</label>
-<input type="checkbox" name="scoopSample" id="scoopSample">
+<div>
+    <label for="scoopSample">Schöpfprobe</label>
+    <input type="checkbox" name="scoopSample" id="scoopSample">
+</div>
 
 <label for="pumpType">Pumpenart</label>
 <select name="pumpType" id="pumpType">
@@ -110,35 +114,17 @@
 <input type="text" name="pumpDuration" id="pumpDuration">
 <label for="pumpDuration">[Std:Min]</label>
 
-<!-- <table>
-    <tr>
-        <th>Messung</th>
-
-        <th>Wasserstand</th>
-        <th>Förderleistung</th>
-        <th>Stand Wasserzähler [m³]</th>
-        <th>Temperatur [°C]</th>
-        <th>Messung</th>
-        <th>LF [µS/cm]</th>
-        <th>pH-Wert</th>
-        <th>O2 [mg/l]</th>
-        <th>Redoxspannung Eh [mV]</th>
-        <th>Färbung - Intensität</th>
-        <th>Färbung</th>
-        <th>Trübung</th>
-        <th>Geruch - Intensität</th>
-        <th>Geruch - Allgemeine</th>
-        <th>Geruch - Differenziert</th>
-    </tr>
-    <tr>
-        <th>Uhrzeit</th>
-    </tr>
-</table> -->
+<button>Neue Messung</button>
 
 <style>
     table
     {
         display: flex;
         flex-direction: column;
+    }
+
+    div input[type="checkbox"]
+    {
+
     }
 </style>
