@@ -1,3 +1,5 @@
+<h1>Bestandsdaten zur Messstelle</h1>
+
 <label for="measurementFinal">Messstellenabschluss</label>
 <select name="measurementFinal" id="measurementFinal">
     <option value="1">Überflur</option>
@@ -50,4 +52,6 @@
 </select>
 
 <!-- Mängel beschreiben und bild einfügen -->
-
+<label for="deficiencies">Mängel</label>
+<label for="deficiencies">Beschreibung</label>
+<input type="file" name="deficiencies" id="deficiencies">
