@@ -5,7 +5,21 @@
     import Signing from "./Signing.svelte";
 </script>
 
-<GeneralData />
-<InventoryData />
-<PumpingProcess />
-<Signing />
+<div>
+    <GeneralData />
+    <InventoryData />
+    <PumpingProcess />
+    <Signing />
+</div>
+
+<style>
+
+    div
+    {
+        display: flex;
+        flex-direction: column;
+        max-width: 35rem;
+        margin: auto;
+    }
+
+</style>

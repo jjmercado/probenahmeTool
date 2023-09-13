@@ -1,35 +1,46 @@
 
+<div>
+    <h1>Generelle Daten</h1>
 
-<h1>Generelle Daten</h1>
+    <label for="datetime">Datum</label>
+    <input type="datetime" name="datetime" id="datetime">
 
-<label for="datetime">Datum</label>
-<input type="datetime" name="datetime" id="datetime">
+    <label for="samplingLocation">Probenahmeort</label>
+    <input type="text" name="samplingLocation" id="samplingLocation">
 
-<label for="samplingLocation">Probenahmeort</label>
-<input type="text" name="samplingLocation" id="samplingLocation">
+    <label for="toBeExecuted">Auszuführender</label>
+    <input type="text" name="toBeExecuted" id="toBeExecuted">
 
-<label for="toBeExecuted">Auszuführender</label>
-<input type="text" name="toBeExecuted" id="toBeExecuted">
+    <label for="client">Auftraggeber</label>
+    <input type="text" name="client" id="client">
 
-<label for="client">Auftraggeber</label>
-<input type="text" name="client" id="client">
+    <label for="investigationPhase">Untersuchungsphase</label>
+    <select name="investigationPhase" id="investigationPhase">
+        <option value="1">Orientierende Untersuchung</option>
+        <option value="2">Detailuntersuchung</option>
+        <option value="3">Sanierungsuntersuchung</option>
+        <option value="4">Nachmessung</option>
+    </select>
 
-<label for="investigationPhase">Untersuchungsphase</label>
-<select name="investigationPhase" id="investigationPhase">
-    <option value="1">Orientierende Untersuchung</option>
-    <option value="2">Detailuntersuchung</option>
-    <option value="3">Sanierungsuntersuchung</option>
-    <option value="4">Nachmessung</option>
-</select>
+    <label for="projectNr">Projekt-Nr</label>
+    <input type="text" name="projectNr" id="projectNr">
 
-<label for="projectNr">Projekt-Nr</label>
-<input type="text" name="projectNr" id="projectNr">
+    <label for="projektManager">Projektleiter</label>
+    <input type="text" name="projektManager" id="projektManager">
 
-<label for="projektManager">Projektleiter</label>
-<input type="text" name="projektManager" id="projektManager">
+    <label for="projectName">Projektname</label>
+    <input type="text" name="projectName" id="projectName">
 
-<label for="projectName">Projektname</label>
-<input type="text" name="projectName" id="projectName">
+    <label for="protocolReceiver">Protokollempfänger</label>
+    <input type="text" name="protocolReceiver" id="protocolReceiver">
+</div>
 
-<label for="protocolReceiver">Protokollempfänger</label>
-<input type="text" name="protocolReceiver" id="protocolReceiver">
+<style>
+    div 
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+</style>

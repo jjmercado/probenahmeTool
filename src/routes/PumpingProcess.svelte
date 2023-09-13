@@ -110,10 +110,10 @@
 <input type="text" name="pumpDuration" id="pumpDuration">
 <label for="pumpDuration">[Std:Min]</label>
 
-<table>
+<!-- <table>
     <tr>
         <th>Messung</th>
-        <th>Uhrzeit</th>
+
         <th>Wasserstand</th>
         <th>Förderleistung</th>
         <th>Stand Wasserzähler [m³]</th>
@@ -131,6 +131,14 @@
         <th>Geruch - Differenziert</th>
     </tr>
     <tr>
-        <td>1</td>
+        <th>Uhrzeit</th>
     </tr>
-</table>
+</table> -->
+
+<style>
+    table
+    {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
