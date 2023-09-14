@@ -3,15 +3,15 @@
     import InventoryData from "./InventoryData.svelte";
     import PumpingProcess from "./PumpingProcess.svelte";
     import Signing from "./Signing.svelte";
-    import NewMeasurement from "./NewMeasurement.svelte";
+    export let data;
+    console.log(data);
 </script>
 
 <div>
-    <GeneralData />
+    <GeneralData {data} />
     <InventoryData />
     <PumpingProcess />
     <Signing />
-    <NewMeasurement />
 </div>
 
 <style>
