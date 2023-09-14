@@ -3,6 +3,7 @@
     import InventoryData from "./InventoryData.svelte";
     import PumpingProcess from "./PumpingProcess.svelte";
     import Signing from "./Signing.svelte";
+    import NewMeasurement from "./NewMeasurement.svelte";
 </script>
 
 <div>
@@ -10,6 +11,7 @@
     <InventoryData />
     <PumpingProcess />
     <Signing />
+    <NewMeasurement />
 </div>
 
 <style>

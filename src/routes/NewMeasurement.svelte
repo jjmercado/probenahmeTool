@@ -28,28 +28,64 @@
 <label for="redoxVoltage">Redoxspannung Eh [mV]</label>
 <input type="text" name="redoxVoltage" id="redoxVoltage">
 
-<label for="coloring">Färbung - Intensität</label>
-<input type="text" name="coloring" id="coloring">
+<label for="coloring">Färbung</label>
+<select name="coloring" id="coloring">
+    <option value="1">farblos</option>
+    <option value="2">weiß</option>
+    <option value="3">gelb</option>
+    <option value="4">gelbbraun</option>
+    <option value="5">braun</option>
+    <option value="6">grün</option>
+    <option value="7">blau</option>
+    <option value="8">rot</option>
+    <option value="9">grau</option>
+    <option value="10">schwarz</option>
+</select>
+
+<label for="coloringIntensity">Färbung - Intensität</label>
+<select name="coloringIntensity" id="coloringIntensity">
+    <option value="1">farblos</option>
+    <option value="2">stark</option>
+    <option value="3">schwach</option>
+</select>
 
 <label for="turbidity">Trübung</label>
-<input type="text" name="turbidity" id="turbidity">
+<select name="turbidity" id="turbidity">
+    <option value="1">klar/ohne</option>
+    <option value="2">fast klar</option>
+    <option value="3">schwach opalisierend</option>
+    <option value="4">opalisierend</option>
+    <option value="5">schwach trüb</option>
+    <option value="6">stark trüb</option>
+    <option value="7">undurchsichtig</option>
+</select>
 
 <label for="smellIntensity">Geruch - Intensität</label>
-<input type="text" name="smellIntensity" id="smellIntensity">
+<select name="smellIntensity" id="smellIntensity">
+    <option value="1">ohne</option>
+    <option value="2">stark</option>
+    <option value="3">schwach</option>
+</select>
 
 <label for="smellGeneral">Geruch - Allgemein</label>
-<input type="text" name="smellGeneral" id="smellGeneral">
+<select name="smellGeneral" id="smellGeneral">
+    <option value="1">ohne</option>
+    <option value="2">erdig</option>
+    <option value="3">modrig</option>
+    <option value="4">faulig</option>
+    <option value="5">jauchig</option>
+    <option value="6">aromatisch</option>
+</select>
 
 <label for="smellDifferentiated">Geruch - Differenziert</label>
-<input type="text" name="smellDifferentiated" id="smellDifferentiated">
+<select name="smellDifferentiated" id="smellDifferentiated">
+    <option value="1">n. Chlor</option>
+    <option value="2">n. Teer</option>
+    <option value="3">n. Mercaptan</option>
+    <option value="4">n. Mineralöl</option>
+    <option value="5">n. H25</option>
+    <option value="6">n. Ozon</option>
+    <option value="7">n. Abwasser</option>
+</select>
 
-<!-- <table>
-    <tr>
-        <th>Geruch - Intensität</th>
-        <th>Geruch - Allgemeine</th>
-        <th>Geruch - Differenziert</th>
-    </tr>
-    <tr>
-        <th>Uhrzeit</th>
-    </tr>
-</table> -->
+<!-- Bei manchen war eine Auswahl kein Inputfeld-->
