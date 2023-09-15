@@ -1,3 +1,8 @@
+<script>
+    let options = ["0", "1"];
+    $: deficiencies = "";
+</script>
+
 <h1>Bestandsdaten zur Messstelle</h1>
 
 <label for="measurementFinal">Messstellenabschluss</label>
@@ -46,12 +51,15 @@
 <label for="filterTubeTo">[m u. MP]</label>
 
 <label for="foundCondition">Vorgefundener Zustand</label>
-<select name="foundCondition" id="foundCondition">
-    <option value="1">Ohne Mängel</option>
-    <option value="2">Mangelhaft</option>
+<select name="foundCondition" id="foundCondition" on:change={(e) => deficiencies = e.target.value}>
+    <option value={options[0]}>Ohne Mängel</option>
+    <option value={options[1]}>Mangelhaft</option>
 </select>
 
-<!-- Mängel beschreiben und bild einfügen -->
-<label for="deficiencies">Mängel</label>
-<label for="deficiencies">Beschreibung</label>
-<input type="file" name="deficiencies" id="deficiencies">
+{#if deficiencies === "1"}
+    <!-- Mängel beschreiben und bild einfügen -->
+    <label for="deficiencies">Beschreibung</label>
+    <input type="text" name="deficiencies" id="deficiencies">
+    <label for="picture">Bild</label>
+    <input type="file" name="picture" id="picture" accept="image/*">
+{/if}
