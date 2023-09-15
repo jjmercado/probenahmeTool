@@ -3,12 +3,14 @@
     import InventoryData from "./InventoryData.svelte";
     import PumpingProcess from "./PumpingProcess.svelte";
     import Signing from "./Signing.svelte";
-    export let data;
-    console.log(data);
+    import OrderData from "./OrderData.svelte";
+
+    export let form;
 </script>
 
 <div>
-    <GeneralData {data} />
+    <OrderData {form}/>
+    <GeneralData {form} />
     <InventoryData />
     <PumpingProcess />
     <Signing />
