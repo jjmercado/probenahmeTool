@@ -1,6 +1,38 @@
 <script>
+    import { onMount } from "svelte";
+
+
     let options = ["0", "1"];
+    $: deficiencyPictures = 0;
     $: deficiencies = "";
+    let container;
+
+    onMount(() => {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        const picLabel = document.createElement('label');
+        const picInput = document.createElement('input');
+
+        label.htmlFor = "deficiencies";
+        label.innerText = "Beschreibung";
+
+        input.type = "text";
+        input.name = "deficiencies";
+        input.id = "deficiencies";
+
+        picLabel.htmlFor = "picture";
+        picLabel.innerText = "Bild";
+
+        picInput.type = "file";
+        picInput.name = "picture";
+        picInput.id = "picture";
+        picInput.accept = "image/*";
+
+        container.appendChild(label);
+        container.appendChild(input);
+        container.appendChild(picLabel);
+        container.appendChild(picInput);
+    });
 </script>
 
 <h1>Bestandsdaten zur Messstelle</h1>
@@ -60,6 +92,12 @@
     <!-- Mängel beschreiben und bild einfügen -->
     <label for="deficiencies">Beschreibung</label>
     <input type="text" name="deficiencies" id="deficiencies">
+
     <label for="picture">Bild</label>
     <input type="file" name="picture" id="picture" accept="image/*">
-{/if}
+    <button on:click={() => deficiencyPictures++ }>+</button>
+    <button on:click={() => deficiencyPictures--}>-</button>
+    {#if deficiencyPictures > 0}
+    {/if}
+    {/if}
+    <div bind:this={container}/>
