@@ -1,38 +1,56 @@
 <script>
-    import { onMount } from "svelte";
-
-
     let options = ["0", "1"];
     $: deficiencyPictures = 0;
     $: deficiencies = "";
+
     let container;
 
-    onMount(() => {
-        const label = document.createElement('label');
-        const input = document.createElement('input');
-        const picLabel = document.createElement('label');
-        const picInput = document.createElement('input');
+    const addDeficiencieElement = () => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        const picLabel = document.createElement("label");
+        const picInput = document.createElement("input");
 
-        label.htmlFor = "deficiencies";
-        label.innerText = "Beschreibung";
+        label.htmlFor = `deficiencies`;
+        label.innerText = "Beschreibung ";
 
         input.type = "text";
-        input.name = "deficiencies";
-        input.id = "deficiencies";
+        input.name = `deficiencies`;
 
-        picLabel.htmlFor = "picture";
-        picLabel.innerText = "Bild";
+        picLabel.htmlFor = `picture`;
+        picLabel.innerText = " Bild ";
+        picLabel.id = `picture`;
 
         picInput.type = "file";
-        picInput.name = "picture";
-        picInput.id = "picture";
+        picInput.name = `picture`;
+        picInput.id = `picture`;
         picInput.accept = "image/*";
 
         container.appendChild(label);
         container.appendChild(input);
         container.appendChild(picLabel);
         container.appendChild(picInput);
-    });
+    };
+
+    const removeDeficiencieElement = () => {
+        let container = document.getElementById("container");
+
+        if(deficiencyPictures < 0)
+        {
+            deficiencyPictures = 0;
+        }
+        else
+        {
+            if(container.hasChildNodes())
+            {
+                container.removeChild(container.lastChild);
+                container.removeChild(container.lastChild);
+                container.removeChild(container.lastChild);
+                container.removeChild(container.lastChild);
+            }
+        }
+
+    }
 </script>
 
 <h1>Bestandsdaten zur Messstelle</h1>
@@ -89,15 +107,29 @@
 </select>
 
 {#if deficiencies === "1"}
-    <!-- Mängel beschreiben und bild einfügen -->
-    <label for="deficiencies">Beschreibung</label>
-    <input type="text" name="deficiencies" id="deficiencies">
+    <div>
+        <label for="deficiencies0">Beschreibung</label>
+        <input type="text" name="deficiencies0" id="deficiencies0">
+        
+        <label for="picture0">Bild</label>
+        <input type="file" name="picture0" id="picture0" accept="image/*">
+    </div>
+    {#if deficiencyPictures >= 0 && deficiencies === "1"}
+        <div id="container" bind:this={container}/>
+    {/if}
+    <div>
+        <button on:click={() => 
+            {
+                deficiencyPictures++;
+                addDeficiencieElement();
+            } 
+        }>+</button>
+        <button on:click={() => 
+            {
+                deficiencyPictures--
+                removeDeficiencieElement();
+            }
+        }>-</button>
+    </div>
 
-    <label for="picture">Bild</label>
-    <input type="file" name="picture" id="picture" accept="image/*">
-    <button on:click={() => deficiencyPictures++ }>+</button>
-    <button on:click={() => deficiencyPictures--}>-</button>
-    {#if deficiencyPictures > 0}
-    {/if}
-    {/if}
-    <div bind:this={container}/>
+{/if}

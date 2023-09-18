@@ -12,7 +12,7 @@
     <OrderData {form}/>
     <GeneralData {form} />
     <InventoryData />
-    <PumpingProcess />
+    <PumpingProcess  />
     <Signing />
 </div>
 
