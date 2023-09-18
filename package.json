@@ -19,6 +19,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@lemonadejs/signature": "^2.0.4",
 		"dotenv": "^16.3.1",
 		"luxon": "^3.4.3",
 		"msnodesqlv8": "^4.1.0",
