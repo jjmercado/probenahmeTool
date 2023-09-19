@@ -2,6 +2,8 @@
     <button>Zurück</button>
 </a>
 
+<!-- Zum hinzufügen springen wenn man zurück navigiert -->
+
 <label for="measurement">Messung</label>
 <input type="text" name="measurement" id="measurement">
 

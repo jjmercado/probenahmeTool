@@ -3,7 +3,7 @@
     import { onMount } from 'svelte';
 
     // @ts-ignore
-    let signaturePad;
+    export let signaturePad;
 
     onMount(() => {
         // @ts-ignore
