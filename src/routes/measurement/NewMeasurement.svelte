@@ -1,3 +1,7 @@
+<a href="/">
+    <button>Zurück</button>
+</a>
+
 <label for="measurement">Messung</label>
 <input type="text" name="measurement" id="measurement">
 
@@ -87,5 +91,3 @@
     <option value="6">n. Ozon</option>
     <option value="7">n. Abwasser</option>
 </select>
-
-<!-- Bei manchen war eine Auswahl kein Inputfeld-->

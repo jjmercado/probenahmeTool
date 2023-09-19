@@ -3,17 +3,26 @@ import "dotenv/config";
 
 const config = 
 {
-    user: process.env.DB_USER,
-    server: process.env.SERVER,
-    database: process.env.DB_TABLENAME,
+    user: "AD-RG\\jmercado",
+    server: "N-RG-SRV-SQL01\\Wiko",
+    database: "RHU",
     options: {
         trustedConnection: true,
         trustServerCertificate: true
     }
+
+    // user: process.env.DB_USER,
+    // server: process.env.SERVER,
+    // database: process.env.DB_TABLENAME,
+    // options: {
+    //     trustedConnection: true,
+    //     trustServerCertificate: true
+    // }
 };
 
 export const getProjectNr = async (/** @type {FormDataEntryValue | null} */ projectNr) => {
     try {
+        // @ts-ignore
         await sql.connect(config);
         console.log("Connected to Database");
         const client = await sql.query(`SELECT ADDITIONAL1 FROM ADDRESS WHERE ID = (SELECT ADDRESS_ID FROM ORDERS WHERE NAME_SHORT = '${projectNr}')`);

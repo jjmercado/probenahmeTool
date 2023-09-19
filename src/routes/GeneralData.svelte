@@ -1,10 +1,28 @@
 <script>
-    import { DateTime } from "luxon";
-    const currentDate = DateTime.now();
+// @ts-nocheck
 
-    export let form;
+import { dataStore } from '../dataStore.js';
+import { DateTime } from "luxon";
 
-    $: projectNr = "";
+const currentDate = DateTime.now();
+let myData = {};
+
+// @ts-ignore
+export let form;
+
+$: projectNr = "";
+
+// Save data to the store
+function saveData() 
+{
+    dataStore.set(myData);
+}
+
+// Load data from the store
+function loadData() 
+{
+    myData = $dataStore;
+}
 </script>
 
 <div>
@@ -35,6 +53,4 @@
         display: flex;
         flex-direction: column;
     }
-
-
 </style>

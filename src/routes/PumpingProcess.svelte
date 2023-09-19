@@ -1,13 +1,14 @@
 <script>
+    // @ts-ignore
     import { DateTime } from "luxon";
 
-    let time = DateTime.now();
     let pumpRadioButton = 1;
     let scoopRadioButton = 0;
     let lotDepth = 0;
     let calmWaterLevel = 0;
     let expansionDiameter;
     let pumpInstallationDepth = 0;
+    // @ts-ignore
     let watchInterval;
 
     $: pumpTimerHour = 0;
@@ -37,26 +38,33 @@
 function calculateCalmWaterLevel()
 {
     let Volumen = 0;
+    // @ts-ignore
     expansionDiameter = +document.getElementById("expansionDiameter").value;
     let setFaktor;
 
     for (const key in Faktor) 
     {
+        // @ts-ignore
         if (expansionDiameter == key)
         {
+            // @ts-ignore
             setFaktor = Faktor[key];
         }
     }
 
     Volumen = (lotDepth - calmWaterLevel) * setFaktor;
 
+    // @ts-ignore
     document.getElementById("standWaterVolume").value = Volumen;
 }
 
 function validatePumpData() {
     let valid = false;
+    // @ts-ignore
     calmWaterLevel = +document.getElementById("calmWaterLevel").value;
+    // @ts-ignore
     lotDepth = +document.getElementById("lotDepth").value;
+    // @ts-ignore
     pumpInstallationDepth = +document.getElementById("pumpInstallationDepth").value;
     
     if(!valid)
@@ -118,6 +126,7 @@ const startPumpStopWatch = () =>
 
 const stopPumpStopWatch = () => 
 {
+    // @ts-ignore
     clearInterval(watchInterval);
 }
 
@@ -248,7 +257,9 @@ const stopPumpStopWatch = () =>
 <input type="text" name="pumpDuration" id="pumpDuration" value="{pumpTimerHour  > 9 ? pumpTimerHour : `0${pumpTimerHour}`}:{pumpTimerMinute  > 9 ? pumpTimerMinute : `0${pumpTimerMinute}`}:{pumpTimerSecond  > 9 ? pumpTimerSecond : `0${pumpTimerSecond}`}">
 <label for="pumpDuration">[Std:Min:Sec]</label>
 
-<button>Neue Messung</button>
+<a href="/measurement">
+    <button >Neue Messung</button>
+</a>
 
 <style>
     table

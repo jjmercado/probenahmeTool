@@ -11,7 +11,7 @@ export const actions = {
     default: async ({request}) => {
         const form = await request.formData();
         const res = await getProjectNr(form.get("projectNr"));
-        console.log("res from database" + JSON.stringify(res?.protocolData));
+        console.log("res from database: " + JSON.stringify(res?.protocolData));
         return {
             protocolData: res?.protocolData,
         };
