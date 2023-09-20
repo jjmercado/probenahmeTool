@@ -1,6 +1,7 @@
 <script>
     // @ts-nocheck
     import { DateTime } from "luxon";
+    import { onMount } from "svelte";
 
     let pumpRadioButton = 1;
     let scoopRadioButton = 0;
@@ -249,11 +250,9 @@ const stopPumpStopWatch = () =>
 <input type="text" name="pumpDuration" id="pumpDuration" value="{pumpTimerHour  > 9 ? pumpTimerHour : `0${pumpTimerHour}`}:{pumpTimerMinute  > 9 ? pumpTimerMinute : `0${pumpTimerMinute}`}:{pumpTimerSecond  > 9 ? pumpTimerSecond : `0${pumpTimerSecond}`}">
 <label for="pumpDuration">[Std:Min:Sec]</label>
 
-<a href="/measurement" id="measurementButton">
-    <button>Neue Messung</button>
+<a href="/measurement">
+    <button>Messungen</button>
 </a>
-
-<div></div>
 
 <style>
     table

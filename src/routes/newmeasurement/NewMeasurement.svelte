@@ -1,12 +1,13 @@
 <script>
-    const createButton = () => 
-    {
-        
-    }
+    
 </script>
 
 <a href="/">
-    <button>Zurück</button>
+    <button>Home</button>
+</a>
+
+<a href="/measurement/#measurementButton">
+    <button>Zurück zu den Messungen</button>
 </a>
 
 <label for="measurement">Messung</label>
@@ -99,6 +100,6 @@
     <option value="7">n. Abwasser</option>
 </select>
 
-<a href="/#measurementButton">
-    <button>Hinzufügen</button>
+<a href="/measurement/#measurementButton">
+    <button on:click={() => sessionStorage.setItem("isAdded", "true")}>Hinzufügen</button>
 </a>

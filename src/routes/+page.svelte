@@ -36,7 +36,7 @@
         {
             if (!element.value) 
             {
-                element.value = sessionStorage.getItem(element.id);    
+                element.value = sessionStorage.getItem(element.id);   
             }
         });
 
@@ -66,7 +66,7 @@
     <OrderData {form}/>
     <GeneralData {form} />
     <InventoryData />
-    <PumpingProcess  />
+    <PumpingProcess />
     <Signing bind:signaturePad />
 </div>
 
