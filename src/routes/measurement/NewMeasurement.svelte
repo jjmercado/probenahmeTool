@@ -1,8 +1,13 @@
+<script>
+    const createButton = () => 
+    {
+        
+    }
+</script>
+
 <a href="/">
     <button>Zurück</button>
 </a>
-
-<!-- Zum hinzufügen springen wenn man zurück navigiert -->
 
 <label for="measurement">Messung</label>
 <input type="text" name="measurement" id="measurement">
@@ -93,3 +98,7 @@
     <option value="6">n. Ozon</option>
     <option value="7">n. Abwasser</option>
 </select>
+
+<a href="/#measurementButton">
+    <button>Hinzufügen</button>
+</a>

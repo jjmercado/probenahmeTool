@@ -53,7 +53,8 @@ function calculateCalmWaterLevel()
     document.getElementById("standWaterVolume").value = Volumen;
 }
 
-function validatePumpData() {
+function validatePumpData() 
+{
     let valid = false;
     calmWaterLevel = +document.getElementById("calmWaterLevel").value;
     lotDepth = +document.getElementById("lotDepth").value;
@@ -185,7 +186,7 @@ const stopPumpStopWatch = () =>
     <label for="pumpInstallationDepth">[m u. MP]</label>
 
     <label for="standWaterVolume">Standwasservolumen</label>
-    <input type="text" name="standWaterVolume" id="standWaterVolume" on:blur={calculateCalmWaterLevel}>
+    <input type="text" name="standWaterVolume" id="standWaterVolume" on:click={calculateCalmWaterLevel}>
     <label for="standWaterVolume">[l]</label>
 
     <label for="lowering">Absenkung bei PN</label>
@@ -248,9 +249,11 @@ const stopPumpStopWatch = () =>
 <input type="text" name="pumpDuration" id="pumpDuration" value="{pumpTimerHour  > 9 ? pumpTimerHour : `0${pumpTimerHour}`}:{pumpTimerMinute  > 9 ? pumpTimerMinute : `0${pumpTimerMinute}`}:{pumpTimerSecond  > 9 ? pumpTimerSecond : `0${pumpTimerSecond}`}">
 <label for="pumpDuration">[Std:Min:Sec]</label>
 
-<a href="/measurement">
-    <button >Neue Messung</button>
+<a href="/measurement" id="measurementButton">
+    <button>Neue Messung</button>
 </a>
+
+<div></div>
 
 <style>
     table

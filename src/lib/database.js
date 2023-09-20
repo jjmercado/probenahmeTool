@@ -3,9 +3,9 @@ import "dotenv/config";
 
 const config = 
 {
-    user: "AD-RG\\jmercado",
-    server: "N-RG-SRV-SQL01\\Wiko",
-    database: "RHU",
+    user: process.env.DB_USER,
+    server: process.env.SERVER,
+    database: process.env.DB_NAME,
     options: {
         trustedConnection: true,
         trustServerCertificate: true

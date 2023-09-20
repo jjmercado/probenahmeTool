@@ -1,20 +1,21 @@
 <script>
+    // @ts-nocheck
     import SignaturePad from 'signature_pad';
     import { onMount } from 'svelte';
 
-    // @ts-ignore
     export let signaturePad;
 
-    onMount(() => {
-        // @ts-ignore
-        signaturePad = new SignaturePad(document.getElementById('signaturePad'), {
+    onMount(() => 
+    {
+        signaturePad = new SignaturePad(document.getElementById('signaturePad'), 
+        {
             backgroundColor: 'rgb(255, 255, 255)',
             penColor: 'rgb(0, 0, 0)'
         });
     })
     
-    const resetButton = () => {
-        // @ts-ignore
+    const resetButton = () => 
+    {
         signaturePad.clear();
     }
 
