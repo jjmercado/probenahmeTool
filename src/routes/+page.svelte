@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
     import GeneralData from "./GeneralData.svelte";
     import InventoryData from "./InventoryData.svelte";
     import PumpingProcess from "./PumpingProcess.svelte";
@@ -7,6 +9,7 @@
     import { onMount } from "svelte";
 
     export let form;
+
     let signaturePad; 
     let signaturePadData;
     
@@ -31,20 +34,20 @@
 
         selectedArrayElements.forEach(element => 
         {
-            // @ts-ignore
-            element.value = sessionStorage.getItem(element.id);    
+            if (!element.value) 
+            {
+                element.value = sessionStorage.getItem(element.id);    
+            }
         });
 
         inputArrayElements.forEach(element => {
             if (!element.value) 
             {                  
-                // @ts-ignore
                 element.value = sessionStorage.getItem(element.id);
             }
         });
         
         return () => {
-            // @ts-ignore
             sessionStorage.setItem("comments", textArea.value);
 
             inputArrayElements.forEach(element => {

@@ -5,7 +5,6 @@
     $: deficiencyPictures = 0;
     $: deficiencies = "";
 
-    // @ts-ignore
     let container;
 
     const addDeficiencieElement = () => {
@@ -29,13 +28,9 @@
         picInput.id = `picture`;
         picInput.accept = "image/*";
 
-        // @ts-ignore
         container.appendChild(label);
-        // @ts-ignore
         container.appendChild(input);
-        // @ts-ignore
         container.appendChild(picLabel);
-        // @ts-ignore
         container.appendChild(picInput);
     };
 
@@ -48,12 +43,10 @@
         }
         else
         {
-            // @ts-ignore
             if(container.hasChildNodes())
             {
                 for (let index = 0; index < 4; index++) 
                 {
-                    // @ts-ignore
                     container.removeChild(container.lastChild);  
                 }
             }

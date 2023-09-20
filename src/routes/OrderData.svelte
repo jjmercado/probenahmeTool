@@ -1,25 +1,6 @@
 <script>
-    import { browser } from "$app/environment";
-    import { onMount, onDestroy } from "svelte";
-
+// @ts-nocheck
     export let form;
-    
-    // onMount(() => {
-
-    //     let client = document.getElementById("client").value;
-    //     let projectManager = document.getElementById("projektManager").value;
-    //     let projectName = document.getElementById("projectName").value;
-    //     let projectNr = document.getElementById("protocolReceiver").value;
-
-    //     if (!client || !projectManager || !projectName || !projectNr) 
-    //     {
-    //         document.getElementById("client").value = sessionStorage.getItem("client");
-    //         document.getElementById("projektManager").value = sessionStorage.getItem("projektManager");
-    //         document.getElementById("projectName").value = sessionStorage.getItem("projectName");
-    //         document.getElementById("protocolReceiver").value = sessionStorage.getItem("protocolReceiver");
-    //     }   
-    // });
-
 </script>
 
 <h1>Auftragsdaten</h1>
