@@ -63,6 +63,7 @@
 </script>
 
 <div>
+    <button on:click={() => {sessionStorage.clear(); window.location.reload()}}>Clear storage</button>
     <OrderData {form}/>
     <GeneralData {form} />
     <InventoryData />

@@ -1,7 +1,6 @@
 <script>
     // @ts-nocheck
     import { DateTime } from "luxon";
-    import { onMount } from "svelte";
 
     let pumpRadioButton = 1;
     let scoopRadioButton = 0;

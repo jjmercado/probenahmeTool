@@ -101,5 +101,19 @@
 </select>
 
 <a href="/measurement/#measurementButton">
-    <button on:click={() => sessionStorage.setItem("isAdded", "true")}>Hinzufügen</button>
+    <button on:click={() => {
+        // sessionStorage.setItem("isAdded", "true"); 
+        let counter;
+        if (sessionStorage.getItem("counter") === "0")
+        {
+            counter = 1;
+            sessionStorage.setItem("counter", `${counter}`)
+        }
+        else
+        {
+            counter = +sessionStorage.getItem("counter");
+            counter++;
+            sessionStorage.setItem("counter", `${counter}`);
+        }
+    }}>Hinzufügen</button>
 </a>

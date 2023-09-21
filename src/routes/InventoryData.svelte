@@ -1,58 +1,33 @@
 <script>
-// @ts-nocheck
+    // @ts-nocheck
+    import { beforeUpdate, onMount } from "svelte";
 
-    let options = ["0", "1"];
+    let optionsDeficiency = ["0", "1"];
     $: deficiencyPictures = 0;
-    $: deficiencies = "";
+    $: deficiencies = "0";
 
-    let container;
+    let ul;
 
-    const addDeficiencieElement = () => {
-        const label = document.createElement("label");
-        const input = document.createElement("input");
-        const picLabel = document.createElement("label");
-        const picInput = document.createElement("input");
-
-        label.htmlFor = `deficiencies`;
-        label.innerText = "Beschreibung ";
-
-        input.type = "text";
-        input.name = `deficiencies`;
-
-        picLabel.htmlFor = `picture`;
-        picLabel.innerText = " Bild ";
-        picLabel.id = `picture`;
-
-        picInput.type = "file";
-        picInput.name = `picture`;
-        picInput.id = `picture`;
-        picInput.accept = "image/*";
-
-        container.appendChild(label);
-        container.appendChild(input);
-        container.appendChild(picLabel);
-        container.appendChild(picInput);
-    };
-
-    const removeDeficiencieElement = () => {
-        let container = document.getElementById("container");
-
-        if(deficiencyPictures < 0)
+    onMount(() => 
+    {
+        deficiencyPictures = +sessionStorage.getItem("deficiencyPictures");
+        deficiencies = sessionStorage.getItem("deficiencies");
+        document.getElementById("foundCondition").selectedIndex = deficiencies;  
+        
+        return () => 
         {
-            deficiencyPictures = 0;
-        }
-        else
-        {
-            if(container.hasChildNodes())
-            {
-                for (let index = 0; index < 4; index++) 
-                {
-                    container.removeChild(container.lastChild);  
-                }
-            }
-        }
+            sessionStorage.setItem("deficiencyPictures", `${deficiencyPictures}`)
+            sessionStorage.setItem("deficiencies", `${deficiencies}`)
+        };
 
-    }
+    });
+
+    beforeUpdate(() => {
+        if (deficiencyPictures <= 0) 
+        {
+            deficiencyPictures = 0;    
+        }
+    });
 </script>
 
 <h1>Bestandsdaten zur Messstelle</h1>
@@ -104,34 +79,34 @@
 
 <label for="foundCondition">Vorgefundener Zustand</label>
 <select name="foundCondition" id="foundCondition" on:change={(e) => deficiencies = e.target.value}>
-    <option value={options[0]}>Ohne Mängel</option>
-    <option value={options[1]}>Mangelhaft</option>
+    <option value={optionsDeficiency[0]}>Ohne Mängel</option>
+    <option value={optionsDeficiency[1]}>Mangelhaft</option>
 </select>
 
 {#if deficiencies === "1"}
-    <div>
-        <label for="deficiencies0">Beschreibung</label>
-        <input type="text" name="deficiencies0" id="deficiencies0">
-        
-        <label for="picture0">Bild</label>
-        <input type="file" name="picture0" id="picture0" accept="image/*">
-    </div>
-    {#if deficiencyPictures >= 0 && deficiencies === "1"}
-        <div id="container" bind:this={container}/>
-    {/if}
-    <div>
-        <button on:click={() => 
-            {
-                deficiencyPictures++;
-                addDeficiencieElement();
-            } 
-        }>+</button>
-        <button on:click={() => 
-            {
-                deficiencyPictures--
-                removeDeficiencieElement();
-            }
-        }>-</button>
-    </div>
 
+<ul bind:this={ul}>
+    <li>
+        <label for="deficiencies">Beschreibung</label>
+        <input type="text" name="deficiencies" id="deficiencies">
+
+        <label for="picture">Bild</label>
+        <input type="file" name="picture" id="picture" accept="image/*">
+    </li>
+    {#each { length: deficiencyPictures} as _}
+        <li>
+            <label for="deficiencies">Beschreibung</label>
+            <input type="text" name="deficiencies" id="deficiencies">
+
+            <label for="picture">Bild</label>
+            <input type="file" name="picture" id="picture" accept="image/*">
+        </li>
+    {/each}
+</ul>
+
+<div>
+    <button on:click={() => deficiencyPictures++ }>+</button>
+
+    <button on:click={() => deficiencyPictures-- }>-</button>
+</div>    
 {/if}
