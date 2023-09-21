@@ -34,7 +34,7 @@
 
         selectedArrayElements.forEach(element => 
         {
-            if (!element.value) 
+            if (sessionStorage.getItem(element.id)) 
             {
                 element.value = sessionStorage.getItem(element.id);   
             }

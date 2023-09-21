@@ -12,7 +12,7 @@
     {
         deficiencyPictures = +sessionStorage.getItem("deficiencyPictures");
         deficiencies = sessionStorage.getItem("deficiencies");
-        document.getElementById("foundCondition").selectedIndex = deficiencies;  
+        // document.getElementById("foundCondition").selectedIndex = deficiencies;  
         
         return () => 
         {
