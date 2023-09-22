@@ -9,6 +9,9 @@
     let expansionDiameter;
     let pumpInstallationDepth = 0;
     let watchInterval;
+    let hasPumpStarted = false;
+    let pumpTimeStart = 0;
+    let totalElapsedTime = 0;
 
     $: pumpTimerHour = 0;
     $: pumpTimerMinute = 0;
@@ -95,31 +98,65 @@ function validatePumpData()
     }
 }
 
-const startPumpStopWatch = () => 
+const startResumeStopWatch = () => 
 {
-    let pumpTimerStart = DateTime.now().toMillis();
-    watchInterval = setInterval(() => {
-        let delta = DateTime.now().toMillis() - pumpTimerStart;
-        pumpTimerHour = Math.floor(delta / 1000 / 60 / 60);
-        pumpTimerMinute = Math.floor(delta / 1000 / 60);
-        pumpTimerSecond = Math.floor(delta / 1000); 
-
-        if (pumpTimerSecond > 59) 
+    if (hasPumpStarted) 
+    {
+        clearInterval(watchInterval);
+        hasPumpStarted = false;
+        document.getElementById("pumpStartResumeButton").textContent = "Resume";
+    } 
+    else 
+    {
+        if (!hasPumpStarted) 
         {
-            pumpTimerSecond = pumpTimerSecond - (pumpTimerMinute * 60);
-        }
+            pumpTimeStart = DateTime.now().toMillis() - totalElapsedTime;    
+        }    
+        watchInterval = setInterval(() => {
+            let currentTime = DateTime.now().toMillis();
+            totalElapsedTime = currentTime - pumpTimeStart;
+            
+            pumpTimerSecond = Math.floor((totalElapsedTime / 1000) % 60);
+            pumpTimerMinute = Math.floor((totalElapsedTime / (1000 * 60)) % 60);
+            pumpTimerHour = Math.floor((totalElapsedTime / (1000 * 60 * 60)) % 24);
+        }, 100);
+        hasPumpStarted = true;
+        document.getElementById("pumpResetButton").disabled = false;
+        document.getElementById("pumpStartResumeButton").textContent = "Pause";
+    }
 
-        if (pumpTimerMinute > 59) 
-        {
-            pumpTimerMinute = pumpTimerMinute - (pumpTimerHour * 60);
-        }
+    // document.getElementById("pumpStopButton").disabled = false;
+    // let pumpTimerStart = DateTime.now().toMillis();
+    // hasPumpStarted = true;
+    // watchInterval = setInterval(() => {
+    //     let delta = DateTime.now().toMillis() - pumpTimerStart;
+    //     pumpTimerHour = Math.floor(delta / 1000 / 60 / 60);
+    //     pumpTimerMinute = Math.floor(delta / 1000 / 60);
+    //     pumpTimerSecond = Math.floor(delta / 1000); 
 
-    }, 100);
+    //     if (pumpTimerSecond > 59) 
+    //     {
+    //         pumpTimerSecond = pumpTimerSecond - (pumpTimerMinute * 60);
+    //     }
+
+    //     if (pumpTimerMinute > 59) 
+    //     {
+    //         pumpTimerMinute = pumpTimerMinute - (pumpTimerHour * 60);
+    //     }
+
+    // }, 100);    
+    
 }
 
 const stopPumpStopWatch = () => 
 {
+    document.getElementById("pumpStartResumeButton").textContent = "Start";
+    document.getElementById("pumpResetButton").disabled = true;
     clearInterval(watchInterval);
+    pumpTimeStart = 0;
+    totalElapsedTime = 0;
+    hasPumpStarted = false;
+    document.getElementById("pumpDuration").value = "00:00:00";
 }
 
 </script>
@@ -242,8 +279,9 @@ const stopPumpStopWatch = () =>
 <input type="text" name="temperature" id="temperature">
 <label for="temperature">[°C]</label>
 
-<button on:click={startPumpStopWatch}>Start</button>
-<button on:click={stopPumpStopWatch}>Stop</button>
+<button on:click={startResumeStopWatch} id="pumpStartResumeButton">Start</button>
+
+<button on:click={stopPumpStopWatch} disabled id="pumpResetButton">Reset</button>
 
 <label for="pumpDuration">Pumpendauer</label>
 <input type="text" name="pumpDuration" id="pumpDuration" value="{pumpTimerHour  > 9 ? pumpTimerHour : `0${pumpTimerHour}`}:{pumpTimerMinute  > 9 ? pumpTimerMinute : `0${pumpTimerMinute}`}:{pumpTimerSecond  > 9 ? pumpTimerSecond : `0${pumpTimerSecond}`}">
