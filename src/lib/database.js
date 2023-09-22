@@ -5,12 +5,14 @@ const config =
 {
     user: process.env.DB_USER,
     server: process.env.SERVER,
-    database: process.env.DB_NAME,
+    database: process.env.DB_TABLENAME,
     options: {
         trustedConnection: true,
         trustServerCertificate: true
     }
 };
+
+console.log(config);
 
 export const getProjectNr = async (/** @type {FormDataEntryValue | null} */ projectNr) => {
     try {
