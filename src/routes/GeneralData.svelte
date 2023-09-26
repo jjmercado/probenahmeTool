@@ -1,11 +1,9 @@
 <script>
 // @ts-nocheck
 
-import { dataStore } from '../dataStore.js';
 import { DateTime } from "luxon";
 
 const currentDate = DateTime.now();
-let myData = {};
 
 export let form;
 </script>

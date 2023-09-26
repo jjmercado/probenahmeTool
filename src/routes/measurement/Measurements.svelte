@@ -1,12 +1,11 @@
 <script>
+    // @ts-nocheck
     import { onMount } from "svelte";
 
-    onMount(() => {
-        // let getAddStatus = sessionStorage.getItem("isAdded");
-        // getAddStatus = getAddStatus === "true" ? true : false;
-        
+    onMount(() => 
+    {    
         let counter = +sessionStorage.getItem("counter");
-        
+ 
         for (let index = 0; index < counter; index++) 
         {
             let getList = document.getElementById("measurementList");
@@ -21,12 +20,8 @@
             newListElement.appendChild(anchor);
             anchor.appendChild(button);
         }
-        // if (getAddStatus) 
-        // {
-
-        //     sessionStorage.setItem("isAdded", "false");    
-        // }
     })
+
 </script>
 
 <a href="/">

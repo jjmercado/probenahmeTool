@@ -1,3 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const dataStore = writable({}); // Initialize the store with an empty object
+export let elapsedTime = writable(0);
+export let interval = writable(0);
+export let pumpStart = writable(false);

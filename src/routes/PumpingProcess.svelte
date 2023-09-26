@@ -1,6 +1,8 @@
 <script>
     // @ts-nocheck
     import { DateTime } from "luxon";
+    import { interval, pumpStart, elapsedTime } from "../dataStore";
+    import { onMount } from "svelte";
 
     let pumpRadioButton = 1;
     let scoopRadioButton = 0;
@@ -9,13 +11,63 @@
     let expansionDiameter;
     let pumpInstallationDepth = 0;
     let watchInterval;
-    let hasPumpStarted = false;
     let pumpTimeStart = 0;
     let totalElapsedTime = 0;
+    
+    let hasPumpStarted = false;
+    let pumpTimerHour = 0;
+    let pumpTimerMinute = 0;
+    let pumpTimerSecond = 0;
 
-    $: pumpTimerHour = 0;
-    $: pumpTimerMinute = 0;
-    $: pumpTimerSecond = 0;
+    const writeStoreData = () =>
+    {
+        interval.update((value) => value = watchInterval);   
+        pumpStart.update((value) => value = hasPumpStarted);
+    }
+
+    interval.subscribe((value) => {
+        if(value) 
+        {
+            watchInterval = value;   
+        }
+    })
+
+    pumpStart.subscribe((value) => {
+        if(value) 
+        {
+            hasPumpStarted = value;
+        }
+    })
+
+    
+    onMount(() => 
+    {
+        if (hasPumpStarted) 
+        {
+            elapsedTime.subscribe((value) => {
+                if(value) 
+                {
+                    totalElapsedTime = value;
+                }
+            })
+            hasPumpStarted = false;
+            clearInterval(watchInterval);
+            startResumeStopWatch();
+        }
+        // else
+        // {
+        //     elapsedTime.subscribe((value) => {
+        //         if(value) 
+        //         {
+        //             totalElapsedTime = value;
+        //         }
+        //     })
+        //     formatTime(totalElapsedTime);
+        //     hasPumpStarted = true;
+        //     document.getElementById("pumpResetButton").disabled = false;
+        //     startResumeStopWatch();
+        // }
+    })
 
     let Faktor = 
     { 
@@ -105,9 +157,10 @@ const startResumeStopWatch = () =>
         clearInterval(watchInterval);
         hasPumpStarted = false;
         document.getElementById("pumpStartResumeButton").textContent = "Resume";
-    } 
+    }
     else 
     {
+        
         if (!hasPumpStarted) 
         {
             pumpTimeStart = DateTime.now().toMillis() - totalElapsedTime;    
@@ -115,37 +168,25 @@ const startResumeStopWatch = () =>
         watchInterval = setInterval(() => {
             let currentTime = DateTime.now().toMillis();
             totalElapsedTime = currentTime - pumpTimeStart;
-            
-            pumpTimerSecond = Math.floor((totalElapsedTime / 1000) % 60);
-            pumpTimerMinute = Math.floor((totalElapsedTime / (1000 * 60)) % 60);
-            pumpTimerHour = Math.floor((totalElapsedTime / (1000 * 60 * 60)) % 24);
+            elapsedTime.update((value) => value = totalElapsedTime);
+            formatTime(totalElapsedTime);
         }, 100);
         hasPumpStarted = true;
         document.getElementById("pumpResetButton").disabled = false;
         document.getElementById("pumpStartResumeButton").textContent = "Pause";
-    }
+    } 
+}
 
-    // document.getElementById("pumpStopButton").disabled = false;
-    // let pumpTimerStart = DateTime.now().toMillis();
-    // hasPumpStarted = true;
-    // watchInterval = setInterval(() => {
-    //     let delta = DateTime.now().toMillis() - pumpTimerStart;
-    //     pumpTimerHour = Math.floor(delta / 1000 / 60 / 60);
-    //     pumpTimerMinute = Math.floor(delta / 1000 / 60);
-    //     pumpTimerSecond = Math.floor(delta / 1000); 
+const formatTime = (elapsedTime) =>
+{
+    pumpTimerSecond = Math.floor((elapsedTime / 1000) % 60);
+    pumpTimerMinute = Math.floor((elapsedTime / (1000 * 60)) % 60);
+    pumpTimerHour = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+}
 
-    //     if (pumpTimerSecond > 59) 
-    //     {
-    //         pumpTimerSecond = pumpTimerSecond - (pumpTimerMinute * 60);
-    //     }
-
-    //     if (pumpTimerMinute > 59) 
-    //     {
-    //         pumpTimerMinute = pumpTimerMinute - (pumpTimerHour * 60);
-    //     }
-
-    // }, 100);    
-    
+const padZero = (num) =>
+{
+    return num < 10 ? "0" + num : num;
 }
 
 const stopPumpStopWatch = () => 
@@ -284,11 +325,11 @@ const stopPumpStopWatch = () =>
 <button on:click={stopPumpStopWatch} disabled id="pumpResetButton">Reset</button>
 
 <label for="pumpDuration">Pumpendauer</label>
-<input type="text" name="pumpDuration" id="pumpDuration" value="{pumpTimerHour  > 9 ? pumpTimerHour : `0${pumpTimerHour}`}:{pumpTimerMinute  > 9 ? pumpTimerMinute : `0${pumpTimerMinute}`}:{pumpTimerSecond  > 9 ? pumpTimerSecond : `0${pumpTimerSecond}`}">
+<input type="text" name="pumpDuration" id="pumpDuration" value="{padZero(pumpTimerHour)}:{padZero(pumpTimerMinute)}:{padZero(pumpTimerSecond)}">
 <label for="pumpDuration">[Std:Min:Sec]</label>
 
 <a href="/measurement">
-    <button>Messungen</button>
+    <button on:click={writeStoreData}>Messungen</button>
 </a>
 
 <style>

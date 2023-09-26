@@ -12,8 +12,6 @@ const config =
     }
 };
 
-console.log(config);
-
 export const getProjectNr = async (/** @type {FormDataEntryValue | null} */ projectNr) => {
     try {
         // @ts-ignore
@@ -25,7 +23,6 @@ export const getProjectNr = async (/** @type {FormDataEntryValue | null} */ proj
         const protocolReceiver = await sql.query(`SELECT EMAIL_COMOPANY FROM EMPLOYEE WHERE CONCAT(FIRST_NAME, ' ' ,LAST_NAME) = '${projectManager.recordset[0].FULLNAME}'`); 
         const samplingLocation = await sql.query(`SELECT CITY FROM ADDRESS WHERE ID = (SELECT ADDRESS_ID FROM ORDERS WHERE NAME_SHORT = '${projectNr}')`);
 
-        console.log("result from additional table: " + JSON.stringify(projectManager.recordset[0]));
         return {
             protocolData: {
                 client: client.recordset[0].ADDITIONAL1,
